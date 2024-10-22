@@ -1,0 +1,34 @@
+class NodoABB:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+def insertar_abb(nodo, valor):
+    if nodo is None:
+        return NodoABB(valor)
+    elif valor < nodo.valor:
+        nodo.izquierdo = insertar_abb(nodo.izquierdo, valor)
+    else:
+        nodo.derecho = insertar_abb(nodo.derecho, valor)
+    return nodo
+
+def buscar(nodo, valor):
+    if nodo is None:
+        return False
+    if valor == nodo.valor:
+        return True
+    elif valor < nodo.valor:
+        return buscar(nodo.izquierdo, valor)
+    else:
+        return buscar(nodo.derecho, valor)
+
+# Construyendo un árbol de búsqueda binaria
+valores = [10, 5, 15, 3, 7, 12, 18]
+raiz_abb = None
+for valor in valores:
+    raiz_abb = insertar_abb(raiz_abb, valor)
+
+numero_a_buscar = 7
+existe = buscar(raiz_abb, numero_a_buscar)
+print(f"¿El número {numero_a_buscar} existe en el árbol? {'Sí' if existe else 'No'}")
