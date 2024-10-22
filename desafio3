@@ -1,0 +1,9 @@
+def recorrido_postorden_y_maximo(nodo):
+    if nodo is None:
+        return float('-inf')  # Valor mínimo posible
+    max_izquierdo = recorrido_postorden_y_maximo(nodo.izquierdo)
+    max_derecho = recorrido_postorden_y_maximo(nodo.derecho)
+    return max(nodo.valor, max_izquierdo, max_derecho)
+
+valor_maximo = recorrido_postorden_y_maximo(raiz)
+print(f"Valor máximo en el árbol (Postorden): {valor_maximo}")
