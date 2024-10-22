@@ -1,0 +1,32 @@
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+def insertar(nodo, valor):
+    if nodo is None:
+        return Nodo(valor)
+    elif valor < nodo.valor:
+        nodo.izquierdo = insertar(nodo.izquierdo, valor)
+    else:
+        nodo.derecho = insertar(nodo.derecho, valor)
+    return nodo
+
+def recorrido_preorden(nodo):
+    if nodo:
+        print(nodo.valor)
+        recorrido_preorden(nodo.izquierdo)
+        recorrido_preorden(nodo.derecho)
+
+# Construyendo un árbol binario
+raiz = Nodo(10)
+insertar(raiz, 5)
+insertar(raiz, 15)
+insertar(raiz, 3)
+insertar(raiz, 7)
+insertar(raiz, 12)
+insertar(raiz, 18)
+
+print("Recorrido en Preorden:")
+recorrido_preorden(raiz)
