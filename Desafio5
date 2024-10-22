@@ -1,0 +1,38 @@
+class NodoExpresion:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+def construir_arbol_expresion(expresion):
+    # Este es un simplificado. En un caso real, se necesitaría un análisis más profundo.
+    if len(expresion) == 1:
+        return NodoExpresion(expresion[0])
+    
+    operador = expresion[1]
+    nodo = NodoExpresion(operador)
+    nodo.izquierdo = construir_arbol_expresion([expresion[0]])
+    nodo.derecho = construir_arbol_expresion(expresion[2:])
+    return nodo
+
+def evaluar_arbol(nodo):
+    if nodo is None:
+        return 0
+    if isinstance(nodo.valor, int):
+        return nodo.valor
+    izquierda = evaluar_arbol(nodo.izquierdo)
+    derecha = evaluar_arbol(nodo.derecho)
+    if nodo.valor == '+':
+        return izquierda + derecha
+    elif nodo.valor == '-':
+        return izquierda - derecha
+    elif nodo.valor == '*':
+        return izquierda * derecha
+    elif nodo.valor == '/':
+        return izquierda / derecha
+
+# Ejemplo de expresión: "3 + 5 * 2"
+expresion = [3, '+', 5, '*', 2]
+arbol_expresion = construir_arbol_expresion(expresion)
+resultado = evaluar_arbol(arbol_expresion)
+print(f"Resultado de la evaluación de la expresión: {resultado}")
