@@ -1,0 +1,10 @@
+def recorrido_inorden_y_suma(nodo):
+    if nodo is None:
+        return 0
+    suma = recorrido_inorden_y_suma(nodo.izquierdo)
+    suma += nodo.valor
+    suma += recorrido_inorden_y_suma(nodo.derecho)
+    return suma
+
+suma_total = recorrido_inorden_y_suma(raiz)
+print(f"Suma total de los nodos (Inorden): {suma_total}")
